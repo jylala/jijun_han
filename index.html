@@ -3,393 +3,2260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="江苏美食打卡地图 - 收录江苏13个地级市特色美食，品味水韵江苏">
-    <title>江苏美食打卡地图 - 品味水韵江苏</title>
+    <meta name="description" content="江浙沪休闲骑行路书 - 苏州、无锡、常州、上海、杭州、南京等地骑行路线推荐，包含亲子骑行、夜骑指南、装备清单">
+    <title>江浙骑行路书 - 休闲骑行路线精选</title>
     <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif; background-color: #FDF8F3; color: #5D4E3A; line-height: 1.9; font-size: 15px; letter-spacing: 0.01em; }
-::selection { background: #E8B4B8; color: #8B4513; }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #FDF8F3; }
-::-webkit-scrollbar-thumb { background: #DEB887; border-radius: 10px; }
-* { scrollbar-width: thin; scrollbar-color: #DEB887 #FDF8F3; }
+/* ==================== 江浙骑行路书 样式表 ==================== */
 
-.hero { background: linear-gradient(180deg, #FFF9F5 0%, #FDF5EE 60%, #F9EEE5 100%); padding: 70px 24px 90px; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(ellipse 200px 100px at 5% 80%, rgba(232,180,184,0.15) 0%, transparent 70%), radial-gradient(ellipse 150px 80px at 95% 20%, rgba(222,184,135,0.12) 0%, transparent 70%), radial-gradient(ellipse 180px 90px at 50% 95%, rgba(180,200,180,0.1) 0%, transparent 70%); pointer-events: none; }
-.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 50"><path d="M0,25 Q50,15 100,25 T200,25 T300,25 T400,25 T500,25 T600,25 T700,25 T800,25 T900,25 T1000,25 T1100,25 T1200,25 L1200,50 L0,50 Z" fill="%23FDF8F3" opacity="0.8"/></svg>'); background-size: 200px 50px; pointer-events: none; }
-.hero-content { position: relative; z-index: 1; }
-.floating-foods { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; overflow: hidden; }
-.floating-food { position: absolute; font-size: 1.8rem; animation: floatUp 8s ease-in-out infinite; opacity: 0.6; }
-.floating-food:nth-child(1) { left: 8%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
-.floating-food:nth-child(2) { left: 85%; top: 15%; animation-delay: 1.5s; animation-duration: 9s; }
-.floating-food:nth-child(3) { left: 15%; top: 70%; animation-delay: 3s; animation-duration: 8s; }
-.floating-food:nth-child(4) { left: 75%; top: 65%; animation-delay: 2s; animation-duration: 10s; }
-.floating-food:nth-child(5) { left: 50%; top: 10%; animation-delay: 4s; animation-duration: 7.5s; }
-@keyframes floatUp { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
-.hero h1 { font-size: 2.8rem; font-weight: 300; color: #8B5A2B; letter-spacing: 0.12em; margin-bottom: 12px; position: relative; display: inline-block; }
-.hero h1::before { content: '~'; position: absolute; left: -30px; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: #DEB887; }
-.hero h1::after { content: '~'; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: #DEB887; }
-.hero .subtitle { font-size: 1rem; color: #A89078; margin-bottom: 20px; letter-spacing: 0.15em; }
-.hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 500px; margin: 0 auto; }
-.hero-tag { background: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; color: #8B5A2B; border: 1px solid rgba(222,184,135,0.3); backdrop-filter: blur(5px); }
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.checkin-counter { position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #FFF9F5 0%, #FFFFFF 100%); padding: 12px 20px; border-radius: 30px; box-shadow: 0 4px 20px rgba(139,90,43,0.12); z-index: 99; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #8B5A2B; border: 1px solid rgba(222,184,135,0.3); }
-.checkin-counter .counter-icon { font-size: 1.2rem; }
-.checkin-counter .counter-num { font-weight: 600; color: #C41E3A; font-size: 1.1rem; }
+html {
+    scroll-behavior: smooth;
+}
 
-.nav-bar { background: rgba(255,249,245,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; padding: 14px 16px; border-bottom: 1px dashed rgba(222,184,135,0.3); }
-.nav-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 900px; margin: 0 auto; list-style: none; }
-.nav-list button { color: #8B5A2B; font-size: 0.85rem; padding: 8px 14px; border-radius: 20px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(255,255,255,0.6); min-height: 44px; border: 1px solid rgba(222,184,135,0.25); cursor: pointer; letter-spacing: 0.02em; }
-.nav-list button:hover { background: rgba(232,180,184,0.25); border-color: rgba(232,180,184,0.5); transform: translateY(-2px); }
-.nav-list button.active { background: linear-gradient(135deg, #E8B4B8 0%, #DEB887 100%); color: #5D3A1A; border-color: transparent; font-weight: 500; }
+body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background-color: #faf8f5;
+    color: #333;
+    line-height: 1.8;
+    font-size: 16px;
+}
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.stats-bar { background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F5 100%); border-radius: 20px; padding: 24px 20px; margin: 32px 0 40px; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px; border: 1px dashed rgba(222,184,135,0.4); box-shadow: 0 2px 16px rgba(139,90,43,0.04); }
-.stat-item { text-align: center; }
-.stat-number { font-size: 1.8rem; font-weight: 300; color: #C41E3A; letter-spacing: 0.05em; }
-.stat-label { font-size: 0.8rem; color: #A89078; margin-top: 2px; }
+/* 书法字体 */
+@font-face {
+    font-family: 'MaShanZheng';
+    src: url('https://fonts.gstatic.com/s/mszenfont/v1/MaShanZheng-Regular.ttf') format('truetype');
+}
 
-.city-section { margin-bottom: 56px; opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-.city-section.visible { opacity: 1; transform: translateY(0); }
-.city-section.hidden { display: none; }
-.city-header { position: relative; padding: 20px 24px 20px 50px; margin-bottom: 28px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 3px 16px rgba(139,90,43,0.06); overflow: hidden; }
-.city-header::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #C41E3A 0%, #E8B4B8 50%, #DEB887 100%); border-radius: 3px 0 0 3px; }
-.city-header::after { content: ''; position: absolute; top: -10px; right: 15px; width: 60px; height: 60px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="20" fill="none" stroke="%23DEB887" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><circle cx="30" cy="30" r="8" fill="%23DEB887" opacity="0.2"/></svg>'); pointer-events: none; }
-.city-icon { font-size: 2rem; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
-.city-header h2 { font-size: 1.5rem; font-weight: 400; color: #5D3A1A; letter-spacing: 0.1em; }
-.city-desc { font-size: 0.85rem; color: #A89078; margin-top: 4px; letter-spacing: 0.05em; }
-.city-nanjing .city-header::before { background: linear-gradient(180deg, #6B4C6B 0%, #C9A0DC 100%); }
-.city-wuxi .city-header::before { background: linear-gradient(180deg, #8B5A2B 0%, #DEB887 100%); }
-.city-xuzhou .city-header::before { background: linear-gradient(180deg, #A0522D 0%, #E8B4B8 100%); }
-.city-changzhou .city-header::before { background: linear-gradient(180deg, #5D7A5D 0%, #A8D8A8 100%); }
-.city-suzhou .city-header::before { background: linear-gradient(180deg, #4A7A6A 0%, #98D4BB 100%); }
-.city-nantong .city-header::before { background: linear-gradient(180deg, #4A6A8A 0%, #9AC4DC 100%); }
-.city-lianyungang .city-header::before { background: linear-gradient(180deg, #7A4A8A 0%, #C9A0DC 100%); }
-.city-huaian .city-header::before { background: linear-gradient(180deg, #A06040 0%, #E8C4A8 100%); }
-.city-yancheng .city-header::before { background: linear-gradient(180deg, #4A6A9A 0%, #9AC4DC 100%); }
-.city-yangzhou .city-header::before { background: linear-gradient(180deg, #5A8A5A 0%, #A8D8A8 100%); }
-.city-zhenjiang .city-header::before { background: linear-gradient(180deg, #8A4A6A 0%, #DC9AB4 100%); }
-.city-taizhou .city-header::before { background: linear-gradient(180deg, #4A7A6A 0%, #98D4BB 100%); }
-.city-suqian .city-header::before { background: linear-gradient(180deg, #7A5A40 0%, #C9A878 100%); }
+/* ==================== 头部封面 ==================== */
+.hero {
+    background: linear-gradient(135deg, #2c5f2d 0%, #1a3a1a 100%);
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+}
 
-.district-title { font-size: 0.95rem; font-weight: 500; color: #5D3A1A; margin: 28px 0 16px; padding: 8px 0; display: flex; align-items: center; gap: 10px; position: relative; }
-.district-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(222,184,135,0.4), transparent); margin-left: 12px; }
-.district-icon { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; }
-.district-icon svg { width: 16px; height: 16px; stroke: #C41E3A; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>');
+    background-size: 30px 30px;
+    opacity: 0.3;
+}
 
-.food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-@media (min-width: 768px) { .food-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .food-grid { grid-template-columns: repeat(3, 1fr); } }
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
 
-.food-card { background: #FFFFFF; border-radius: 20px; overflow: hidden; box-shadow: 0 2px 12px rgba(139,90,43,0.05); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; position: relative; opacity: 0; transform: translateY(15px); }
-.food-card.visible { opacity: 1; transform: translateY(0); }
-.food-card:hover { box-shadow: 0 8px 28px rgba(139,90,43,0.1); transform: translateY(-4px); }
-.food-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #E8B4B8 0%, #DEB887 50%, #C9DCB4 100%); border-radius: 20px 20px 0 0; }
-.food-card::after { content: ''; position: absolute; bottom: 8px; right: 8px; width: 24px; height: 24px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,3 Q15,6 12,9 Q9,6 12,3" stroke="%23DEB887" stroke-width="1" fill="none" stroke-linecap="round"/><circle cx="6" cy="18" r="2" fill="%23E8B4B8" opacity="0.5"/><circle cx="18" cy="18" r="1.5" fill="%23C9DCB4" opacity="0.5"/></svg>'); pointer-events: none; opacity: 0.7; }
-.food-card-header { padding: 18px 16px 12px; position: relative; }
-.food-name { font-size: 1.05rem; font-weight: 500; color: #5D3A1A; margin-bottom: 8px; letter-spacing: 0.02em; }
-.food-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.food-tag { background: rgba(232,180,184,0.15); padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; color: #8B5A2B; border: 1px solid rgba(232,180,184,0.3); }
-.food-tag.heritage { background: rgba(196,30,58,0.08); border-color: rgba(196,30,58,0.2); color: #C41E3A; }
-.food-tag.seasonal { background: rgba(180,200,180,0.2); border-color: rgba(180,200,180,0.4); color: #5A7A5A; }
-.food-tag.snack { background: rgba(222,184,135,0.15); border-color: rgba(222,184,135,0.3); }
-.food-card-body { padding: 0 16px 16px; }
-.food-brief { font-size: 0.85rem; color: #8B7355; line-height: 1.7; margin-bottom: 12px; }
-.food-footer { display: flex; justify-content: space-between; align-items: center; }
-.checkin-btn { display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 15px; font-size: 0.75rem; color: #8B5A2B; background: rgba(255,255,255,0.8); border: 1px dashed rgba(222,184,135,0.5); cursor: pointer; transition: all 0.3s ease; }
-.checkin-btn:hover { background: rgba(232,180,184,0.2); border-color: #E8B4B8; }
-.checkin-btn.checked { background: linear-gradient(135deg, #C41E3A 0%, #E8B4B8 100%); color: #FFFFFF; border-color: transparent; }
-.food-detail-btn { font-size: 0.8rem; color: #A89078; display: flex; align-items: center; gap: 2px; transition: all 0.3s ease; }
-.food-detail-btn::after { content: ' ›'; font-size: 1rem; transition: transform 0.2s ease; }
-.food-card:hover .food-detail-btn { color: #C41E3A; }
-.food-card:hover .food-detail-btn::after { transform: translateX(2px); }
+.hero h1 {
+    font-family: 'MaShanZheng', cursive;
+    font-size: 3.5rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(93,78,58,0.3); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(3px); }
-.modal-overlay.show { display: flex; }
-.modal-content { background: #FFFFFF; border-radius: 24px; max-width: 560px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 12px 48px rgba(93,78,58,0.15); animation: modalPop 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-@keyframes modalPop { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-.modal-header { padding: 28px 28px 20px; border-bottom: 1px dashed rgba(222,184,135,0.3); position: sticky; top: 0; background: #FFFFFF; z-index: 1; border-radius: 24px 24px 0 0; }
-.modal-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 50%; background: rgba(222,184,135,0.2); border: none; cursor: pointer; font-size: 1.3rem; color: #8B5A2B; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-.modal-close:hover { background: #C41E3A; color: #FFFFFF; transform: rotate(90deg); }
-.modal-title { font-size: 1.4rem; font-weight: 500; color: #5D3A1A; padding-right: 40px; letter-spacing: 0.03em; }
-.modal-location { font-size: 0.85rem; color: #A89078; margin-top: 4px; }
-.modal-body { padding: 24px 28px 32px; }
-.modal-section { margin-bottom: 22px; }
-.modal-section-title { font-weight: 500; color: #8B5A2B; margin-bottom: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; }
-.modal-compare { background: rgba(255,249,245,0.8); border-radius: 16px; padding: 18px 20px; font-size: 0.9rem; color: #6B5B4A; line-height: 1.9; border: 1px dashed rgba(222,184,135,0.5); position: relative; }
-.modal-compare strong { color: #8B5A2B; }
-.modal-compare p { margin-bottom: 8px; }
-.modal-shop { background: linear-gradient(135deg, rgba(200,220,200,0.15) 0%, rgba(232,180,184,0.1) 100%); border-radius: 16px; padding: 16px 18px; font-size: 0.9rem; color: #6B5B4A; border: 1px dashed rgba(180,200,180,0.4); display: flex; align-items: flex-start; gap: 8px; }
-.modal-shop svg { flex-shrink: 0; margin-top: 2px; }
-.modal-shop strong { color: #5D3A1A; }
-.modal-story { font-size: 0.9rem; color: #6B5B4A; line-height: 1.9; }
-.modal-story p { margin-bottom: 10px; }
-.modal-desc { font-size: 0.9rem; color: #6B5B4A; line-height: 1.9; }
-.modal-desc p { margin-bottom: 10px; }
+.hero .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
 
-.footer { background: linear-gradient(180deg, #F9EEE5 0%, #F5E5D5 100%); text-align: center; padding: 48px 24px; margin-top: 64px; position: relative; border-top: 1px dashed rgba(222,184,135,0.4); }
-.footer::before { content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 50px; height: 30px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 30"><path d="M25,5 Q30,15 25,25 Q20,15 25,5" fill="%23E8B4B8" opacity="0.5"/><circle cx="10" cy="20" r="3" fill="%23DEB887" opacity="0.4"/><circle cx="40" cy="15" r="2" fill="%23C9DCB4" opacity="0.4"/></svg>'); }
-.footer p { color: #A89078; font-size: 0.85rem; margin-bottom: 8px; }
-.footer-decoration { display: flex; justify-content: center; gap: 20px; margin-top: 16px; font-size: 1.1rem; }
+.hero .region-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-size: 0.95rem;
+    backdrop-filter: blur(5px);
+}
 
-@media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero h1::before, .hero h1::after { display: none; } .nav-list button { padding: 8px 12px; font-size: 0.8rem; min-height: 40px; } .stats-bar { padding: 20px 16px; } .stat-number { font-size: 1.4rem; } .city-header h2 { font-size: 1.3rem; } .floating-food { font-size: 1.4rem; } .checkin-counter { bottom: 15px; right: 15px; padding: 10px 16px; font-size: 0.8rem; } }
-@media (max-width: 480px) { .hero { padding: 50px 16px 70px; } .hero h1 { font-size: 1.7rem; } .food-grid { gap: 14px; } .container { padding: 0 14px; } .modal-content { margin: 10px; border-radius: 20px; } .modal-header, .modal-body { padding: 20px; } }
-.hidden { display: none !important; }
+/* 导航栏 */
+.nav-bar {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 12px 20px;
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 15px;
+    transition: all 0.2s;
+    background: #f5f5f5;
+}
+
+.nav-list a:hover {
+    background: #2c5f2d;
+    color: #fff;
+}
+
+/* 主容器 */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 章节通用样式 */
+.section {
+    padding: 50px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-family: 'MaShanZheng', cursive;
+    font-size: 2rem;
+    color: #2c5f2d;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    border-left: 4px solid #c41e3a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: '◈';
+    color: #c41e3a;
+}
+
+/* ==================== 使用说明 ==================== */
+.usage-intro {
+    background: linear-gradient(135deg, #f8f9f7 0%, #f0f2ee 100%);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #e5e7e3;
+}
+
+.usage-intro p {
+    margin-bottom: 15px;
+}
+
+.usage-intro strong {
+    color: #2c5f2d;
+}
+
+.difficulty-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.difficulty-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.difficulty-stars {
+    color: #c41e3a;
+    letter-spacing: 2px;
+}
+
+/* 难度徽章 */
+.difficulty-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.difficulty-1 { background: #d4edda; color: #155724; }
+.difficulty-2 { background: #c3e6cb; color: #0f5132; }
+.difficulty-3 { background: #fff3cd; color: #856404; }
+
+/* ==================== 速查表 ==================== */
+.quick-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.quick-table th {
+    background: #2c5f2d;
+    color: #fff;
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.quick-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.quick-table tr:hover {
+    background: #f8f9f7;
+}
+
+.quick-table tr:last-child td {
+    border-bottom: none;
+}
+
+.route-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.route-region {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* 区域筛选标签 */
+.region-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border: 2px solid #ddd;
+    background: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #2c5f2d;
+    border-color: #2c5f2d;
+    color: #fff;
+}
+
+/* ==================== 季节推荐 ==================== */
+.season-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.season-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+}
+
+.season-card:hover {
+    transform: translateY(-3px);
+}
+
+.season-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.season-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.season-desc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ==================== 路线卡片 ==================== */
+.routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.route-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.route-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+.route-header {
+    background: linear-gradient(135deg, #2c5f2d 0%, #3d7a3e 100%);
+    color: #fff;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.route-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.route-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.route-body {
+    padding: 20px;
+}
+
+.route-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.info-label {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.info-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.route-desc {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: #f8f9f7;
+    border-radius: 8px;
+    border-left: 3px solid #2c5f2d;
+}
+
+.route-highlights {
+    margin-bottom: 15px;
+}
+
+.highlight-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2c5f2d;
+    margin-bottom: 8px;
+}
+
+.highlight-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.highlight-tag {
+    background: #e8f5e9;
+    color: #2c5f2d;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.route-footer {
+    padding: 15px 20px;
+    background: #faf8f5;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.access-info {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    background: #c41e3a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.nav-link:hover {
+    background: #a01830;
+}
+
+/* 区域分组标题 */
+.region-group-title {
+    font-family: 'MaShanZheng', cursive;
+    font-size: 1.6rem;
+    color: #2c5f2d;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2c5f2d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.region-group-title::before {
+    content: '◉';
+    color: #c41e3a;
+}
+
+/* ==================== 亲子路线 ==================== */
+.family-section {
+    background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px dashed #f0c850;
+}
+
+.family-section .section-title {
+    color: #b8860b;
+    border-left-color: #b8860b;
+}
+
+.family-section .section-title::before {
+    color: #b8860b;
+}
+
+/* ==================== 夜骑指南 ==================== */
+.nightride-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.nightride-section .section-title {
+    color: #fff;
+    border-left-color: #e94560;
+}
+
+.nightride-section .section-title::before {
+    color: #e94560;
+}
+
+.nightride-rules {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.nightride-rules h4 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.nightride-rules ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nightride-rules li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nightride-rules li:last-child {
+    border-bottom: none;
+}
+
+.nightride-rules li::before {
+    content: '⚡';
+    position: absolute;
+    left: 0;
+}
+
+/* ==================== 装备清单 ==================== */
+.gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.gear-category {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.gear-category h4 {
+    color: #2c5f2d;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gear-category.must-have h4 {
+    color: #c41e3a;
+}
+
+.gear-category.seasonal h4 {
+    color: #6a5acd;
+}
+
+.gear-list {
+    list-style: none;
+}
+
+.gear-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gear-list li:last-child {
+    border-bottom: none;
+}
+
+.gear-list li::before {
+    content: '○';
+    color: #2c5f2d;
+    font-weight: bold;
+}
+
+.gear-category.must-have .gear-list li::before {
+    color: #c41e3a;
+}
+
+.gear-category.seasonal .gear-list li::before {
+    color: #6a5acd;
+}
+
+/* ==================== 安全须知 ==================== */
+.safety-section {
+    background: linear-gradient(135deg, #ffe6e6 0%, #ffd9d9 100%);
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px solid #ffcccc;
+}
+
+.safety-section .section-title {
+    color: #c41e3a;
+    border-left-color: #c41e3a;
+}
+
+.safety-section .section-title::before {
+    color: #c41e3a;
+}
+
+.safety-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.safety-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 4px solid #c41e3a;
+}
+
+.safety-card h4 {
+    color: #c41e3a;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.safety-card p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* ==================== 页脚 ==================== */
+.footer {
+    background: #2c5f2d;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 50px;
+}
+
+.footer p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.footer .copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero .subtitle {
+        font-size: 1rem;
+    }
+    
+    .nav-list {
+        gap: 6px;
+    }
+    
+    .nav-list a {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .section {
+        padding: 35px 0;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .routes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-table {
+        font-size: 0.85rem;
+    }
+    
+    .quick-table th,
+    .quick-table td {
+        padding: 10px 8px;
+    }
+    
+    .season-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .route-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero {
+        padding: 50px 15px 40px;
+    }
+    
+    .season-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .difficulty-legend {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* ==================== 动画效果 ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.route-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.route-card:nth-child(1) { animation-delay: 0.1s; }
+.route-card:nth-child(2) { animation-delay: 0.2s; }
+.route-card:nth-child(3) { animation-delay: 0.3s; }
+.route-card:nth-child(4) { animation-delay: 0.4s; }
+.route-card:nth-child(5) { animation-delay: 0.5s; }
+.route-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* 隐藏元素 */
+.hidden {
+    display: none;
+}
+
+/* 平滑过渡 */
+.fade-transition {
+    transition: opacity 0.3s ease;
+}
+
 </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<header class="hero">
-    <div class="floating-foods">
-        <span class="floating-food">🍜</span>
-        <span class="floating-food">🥟</span>
-        <span class="floating-food">🦀</span>
-        <span class="floating-food">🍵</span>
-        <span class="floating-food">🥮</span>
-    </div>
-    <div class="hero-content">
-        <h1>江苏美食打卡地图</h1>
-        <p class="subtitle">品味水韵江苏 · 探寻13市地道风味</p>
-        <div class="hero-tags">
-            <span class="hero-tag">🍜 特色面食</span>
-            <span class="hero-tag">🥢 经典菜肴</span>
-            <span class="hero-tag">🦐 时令江鲜</span>
-            <span class="hero-tag">🍰 街头小吃</span>
+    <!-- 封面 -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>江浙骑行路书</h1>
+            <p class="subtitle">长三角休闲骑行路线精选指南</p>
+            <span class="region-tag">📍 苏州 · 无锡 · 常州 · 上海 · 杭州 · 南京</span>
         </div>
-    </div>
-</header>
+    </header>
 
-<nav class="nav-bar">
-    <div class="nav-list">
-        <button class="active" data-city="all">全部</button>
-        <button data-city="nanjing">南京</button>
-        <button data-city="wuxi">无锡</button>
-        <button data-city="xuzhou">徐州</button>
-        <button data-city="changzhou">常州</button>
-        <button data-city="suzhou">苏州</button>
-        <button data-city="nantong">南通</button>
-        <button data-city="lianyungang">连云港</button>
-        <button data-city="huaian">淮安</button>
-        <button data-city="yancheng">盐城</button>
-        <button data-city="yangzhou">扬州</button>
-        <button data-city="zhenjiang">镇江</button>
-        <button data-city="taizhou">泰州</button>
-        <button data-city="suqian">宿迁</button>
-    </div>
-</nav>
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+        <ul class="nav-list">
+            <li><a href="#usage">使用说明</a></li>
+            <li><a href="#quick-table">速查表</a></li>
+            <li><a href="#seasons">四时骑行</a></li>
+            <li><a href="#suzhou">苏州路线</a></li>
+            <li><a href="#wuxi">无锡路线</a></li>
+            <li><a href="#shanghai">上海路线</a></li>
+            <li><a href="#hangzhou">杭州路线</a></li>
+            <li><a href="#nanjing">南京路线</a></li>
+            <li><a href="#family">亲子骑行</a></li>
+            <li><a href="#nightride">夜骑指南</a></li>
+            <li><a href="#gear">装备清单</a></li>
+            <li><a href="#safety">安全须知</a></li>
+        </ul>
+    </nav>
 
-<main class="container">
-    <div class="stats-bar">
-        <div class="stat-item"><div class="stat-number">13</div><div class="stat-label">地级市</div></div>
-        <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">区县</div></div>
-        <div class="stat-item"><div class="stat-number">147</div><div class="stat-label">特色美食</div></div>
-        <div class="stat-item"><div class="stat-number">30+</div><div class="stat-label">非遗美食</div></div>
-    </div>
-    <div id="food-content"></div>
-</main>
-
-<div class="checkin-counter">
-    <span class="counter-icon">📍</span>
-    <span>已打卡</span>
-    <span class="counter-num" id="checkin-count">0</span>
-    <span>道美食</span>
-</div>
-
-<div class="modal-overlay" id="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h3 class="modal-title" id="modal-title"></h3>
-            <div class="modal-location" id="modal-location"></div>
-        </div>
-        <div class="modal-body">
-            <div class="modal-section">
-                <div class="modal-section-title">📖 简介</div>
-                <div class="modal-desc" id="modal-desc"></div>
-            </div>
-            <div class="modal-section" id="story-section">
-                <div class="modal-section-title">🏮 美食故事</div>
-                <div class="modal-story" id="modal-story"></div>
-            </div>
-            <div class="modal-section" id="compare-section">
-                <div class="modal-section-title">✨ 讲究在哪</div>
-                <div class="modal-compare" id="modal-compare"></div>
-            </div>
-            <div class="modal-section" id="shop-section">
-                <div class="modal-section-title">📍 推荐店铺</div>
-                <div class="modal-shop" id="modal-shop"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer class="footer">
-    <div class="footer-decoration">
-        <span>🏛️</span>
-        <span>🍜</span>
-        <span>🏮</span>
-        <span>🌸</span>
-    </div>
-    <p>江苏美食打卡地图 · 品味水韵江苏</p>
-    <p>数据来源：江苏省商务厅、各市政府官网、非遗名录</p>
-</footer>
-
-<script>
-const foodData = {"nanjing": {"name": "南京", "icon": "🏛️", "desc": "金陵风味，六朝烟水", "districts": {"玄武区": [{"name": "金陵饭店盐水鸭", "tags": ["南京特产"], "brief": "选料选用湖熟鸭场当年仔鸭，养足60天", "desc": "", "story": "", "shop": "", "compare": "【选料】选用湖熟鸭场当年仔鸭，养足60天<br>【工艺】经14道古法工序：炒盐腌、清卤复、烘得干、焐得足<br>【讲究】炒盐是关键，用粗盐加八角、花椒炒香"}, {"name": "蒋有记牛肉锅贴", "tags": ["南京特产"], "brief": "选料必须用新鲜黄牛肉，现切现绞", "desc": "", "story": "", "shop": "", "compare": "【选料】必须用新鲜黄牛肉，现切现绞<br>【馅料】牛肉需加花椒水顺时针搅打上劲<br>【煎制】平底锅先煎底面，再加水焖煮，确保底部酥脆金黄"}], "秦淮区": [{"name": "奇芳阁鸭油酥烧饼", "tags": ["南京特产"], "brief": "用油必须用新鲜鸭油，拒绝植物油", "desc": "", "story": "", "shop": "", "compare": "【用油】必须用新鲜鸭油，拒绝植物油<br>【和面】面团需醒发两次，每次30分钟以上<br>【烤制】传统砖炉烤制，温度需达200度"}, {"name": "莲湖糕团店赤豆元宵", "tags": ["南京特产"], "brief": "选材糯米选用无锡大浮杨母所产", "desc": "", "story": "", "shop": "", "compare": "【选材】糯米选用无锡大浮杨母所产<br>【红豆】只用六合赤豆，浸泡一夜后文火熬煮3小时<br>【讲究】元宵必须是现搓现煮"}, {"name": "鸡汁汤包", "tags": ["南京特产"], "brief": "汤底用老母鸡、猪骨熬制8小时以上", "desc": "", "story": "", "shop": "", "compare": "【汤底】用老母鸡、猪骨熬制8小时以上<br>【馅心】鸡汤、皮冻、鲜肉比例约为1:1:2<br>【吃法】轻轻提，慢慢移，先开窗，后喝汤"}], "建邺区": [{"name": "南湖鸭血粉丝汤", "tags": ["南京特产"], "brief": "鸭血必须用当天新鲜鸭血", "desc": "", "story": "", "shop": "", "compare": "【鸭血】必须用当天新鲜鸭血<br>【汤底】用鸭骨、鸡架熬制4小时<br>【配料】鸭肠需用盐和醋反复揉搓去腥"}, {"name": "南湖胖子砂锅", "tags": ["南京特产"], "brief": "皮肚猪脊背肉皮经煮-晒-炸-泡四步", "desc": "", "story": "", "shop": "", "compare": "【皮肚】猪脊背肉皮经煮-晒-炸-泡四步<br>【汤底】用猪骨、老母鸡熬制8小时<br>【配菜】皮肚、肉丝、青菜、木耳缺一不可"}], "鼓楼区": [{"name": "狮子桥湖南路美食街", "tags": ["南京特产"], "brief": "选料只用太湖猪肋排，每头猪只能取8根", "desc": "", "story": "", "shop": "", "compare": "【选料】只用太湖猪肋排，每头猪只能取8根<br>【配方】百年秘方，酱油、冰糖、黄酒比例严格保密<br>【工艺】大火烧开、小火焖煮3小时以上"}], "栖霞区": [{"name": "栖霞山素斋", "tags": ["南京特产"], "brief": "皮冻鸡汤与猪皮熬制12小时", "desc": "", "story": "", "shop": "", "compare": "【皮冻】鸡汤与猪皮熬制12小时<br>【收口】每个包子至少18个褶子<br>【蒸制】大火蒸6分钟"}], "江宁区": [{"name": "江宁肚包鸡", "tags": ["南京特产"], "brief": "铁锅必须用老铁锅，导热均匀", "desc": "", "story": "", "shop": "", "compare": "【铁锅】必须用老铁锅，导热均匀<br>【柴火】传统用木柴火，大火炖煮、小火慢焖<br>【贴饼】面饼需现贴现烙"}, {"name": "湖熟板鸭", "tags": ["南京特产"], "brief": "选肉只用五花肉，肥瘦比例37", "desc": "", "story": "", "shop": "", "compare": "【选肉】只用五花肉，肥瘦比例3:7<br>【捆扎】用蒲草捆扎，防止变形散开<br>【火候】大火烧开、小火焖煮4小时"}], "浦口区": [{"name": "珍珠泉泉水鸭", "tags": ["南京特产"], "brief": "历史源自彭祖创制的天下第一羹", "desc": "", "story": "", "shop": "", "compare": "【历史】源自彭祖创制的天下第一羹<br>【熬制】老母鸡、猪骨、麦仁熬制10-16小时<br>【配料】鳝鱼骨是徐州特色"}], "六合区": [{"name": "六合猪头肉", "tags": ["南京特产"], "brief": "面条手工抻制，反复揉搓摔打30分钟", "desc": "", "story": "", "shop": "", "compare": "【面条】手工抻制，反复揉搓摔打30分钟<br>【宽窄】面条宽度约2厘米<br>【辣油】辣椒油是灵魂"}, {"name": "龙袍蟹黄汤包", "tags": ["南京特产"], "brief": "选鱼必须用鲜活太湖鳜鱼，重量约750克最佳", "desc": "", "story": "", "shop": "", "compare": "【选鱼】必须用鲜活太湖鳜鱼，重量约750克最佳<br>【刀工】鱼肉剞菱形花刀，深至鱼皮但不切断<br>【炸制】两炸法：低温定型、高温复炸<br>【酱汁】传统以冰糖、镇江香醋调制"}], "溧水区": [{"name": "溧水手抓鸡", "tags": ["南京特产"], "brief": "标志青壳白肚、金爪黄毛", "desc": "", "story": "", "shop": "", "compare": "【标志】青壳白肚、金爪黄毛<br>【水质】阳澄湖水质清澈偏碱性<br>【文化】鲁迅称巴解为第一食蟹者"}, {"name": "天生桥豆腐", "tags": ["南京特产"], "brief": "国宴1949年开国大典首道热菜", "desc": "", "story": "", "shop": "", "compare": "【国宴】1949年开国大典首道热菜<br>【选料】只用洪泽湖笔杆青黄鳝<br>【刀工】人工将鳝鱼活杀取脊背肉<br>【特点】蒜香浓郁，滑嫩入味"}], "高淳区": [{"name": "固城湖螃蟹", "tags": ["南京特产"], "brief": "乾隆乾隆皇帝品尝后赞其天下第一", "desc": "", "story": "", "shop": "", "compare": "【乾隆】乾隆皇帝品尝后赞其天下第一<br>【刀工】豆腐切成如发丝般的细条<br>【配料】鸡汤、火腿吊鲜"}, {"name": "高淳老街糕点", "tags": ["南京特产"], "brief": "历史1990年代许建忠根据卤菜八大味发明", "desc": "", "story": "", "shop": "", "compare": "【历史】1990年代许建忠根据卤菜八大味发明<br>【香料】三十多种中草药调配<br>【标准】盱眙龙虾品牌价值超200亿"}], "代表面食": [{"name": "皮肚面", "tags": ["南京特产"], "brief": "历史始于1817年，淮扬菜发源地", "desc": "", "story": "", "shop": "", "compare": "【历史】始于1817年，淮扬菜发源地<br>【乾隆】乾隆对不出村姑对子，赐名文楼<br>【工艺】32道工序，需8小时才能制成"}]}}, "wuxi": {"name": "无锡", "icon": "🛶", "desc": "太湖之滨，甜蜜无锡", "districts": {"梁溪区": [{"name": "三凤桥酱排骨", "tags": ["无锡特产"], "brief": "刀工一块大白干切成20余片，再切成细如发丝", "desc": "", "story": "", "shop": "", "compare": "【刀工】一块大白干切成20余片，再切成细如发丝<br>【烫制】干丝需用沸水反复浇烫三遍<br>【调味】香油、酱油、少许糖"}, {"name": "王兴记小笼馒头", "tags": ["无锡特产"], "brief": "历史源于隋炀帝时期的碎金饭", "desc": "", "story": "", "shop": "", "compare": "【历史】源于隋炀帝时期的碎金饭<br>【标准】2015年扬州市政府发布地方标准<br>【配料】需有鸡蛋、虾仁、火腿等至少八种"}], "滨湖区": [{"name": "太湖三白", "tags": ["无锡特产"], "brief": "历史相传硝当作盐腌制猪蹄时发明", "desc": "", "story": "", "shop": "", "compare": "【历史】相传硝当作盐腌制猪蹄时发明<br>【国宴】1949年开国大典列为冷碟主菜<br>【吃法】配镇江香醋和姜丝"}, {"name": "太湖船点", "tags": ["无锡特产"], "brief": "传说乾隆误将锅盖扔进锅里，却使面条更劲道", "desc": "", "story": "", "shop": "", "compare": "【传说】乾隆误将锅盖扔进锅里，却使面条更劲道<br>【工艺】跳面技法，竹杠压面团<br>【汤底】鳝鱼骨和鸡汤熬制"}], "锡山区": [{"name": "甘露青鱼", "tags": ["无锡特产"], "brief": "历史1840年恒顺发明", "desc": "", "story": "", "shop": "", "compare": "【历史】1840年恒顺发明<br>【特点】酸中带甜、香醇不涩、久存愈香"}], "惠山区": [{"name": "惠山油酥", "tags": ["非遗"], "brief": "历史清康熙年间创制，已有300多年", "desc": "", "story": "", "shop": "", "compare": "【历史】清康熙年间创制，已有300多年<br>【区别】与扬州干丝不同，经碱水处理口感更滑嫩<br>【非遗】已入选省级非遗名录"}], "新吴区": [{"name": "太湖银鱼", "tags": ["非遗"], "brief": "汤底鳝鱼骨、鲫鱼熬制数小时", "desc": "", "story": "", "shop": "", "compare": "【汤底】鳝鱼骨、鲫鱼熬制数小时<br>【特点】汤白如乳、鲜而不腥<br>【非遗】泰州早茶的灵魂"}], "代表面食": [{"name": "阳春面", "tags": ["非遗", "地理标志"], "brief": "历史近200年，2015年获国家地理标志证明商标", "desc": "", "story": "", "shop": "", "compare": "【历史】近200年，2015年获国家地理标志证明商标<br>【非遗】省级非物质文化遗产<br>【标准】皮薄如纸、吹弹即破"}]}}, "xuzhou": {"name": "徐州", "icon": "🐉", "desc": "楚风汉韵，味蕾徐州", "districts": {"云龙区": [{"name": "老家地锅", "tags": ["非遗"], "brief": "历史清乾隆年间创制，2015年入选江苏非遗", "desc": "", "story": "", "shop": "", "compare": "【历史】清乾隆年间创制，2015年入选江苏非遗<br>【熬制】鲫鱼、鳝鱼骨、猪骨三煸三炒三滤<br>【时间】需熬制8小时以上"}, {"name": "凤岐把子肉", "tags": ["徐州特产"], "brief": "和面面粉中加入鸡蛋清和食用碱", "desc": "", "story": "", "shop": "", "compare": "【和面】面粉中加入鸡蛋清和食用碱<br>【压面】需反复碾压多次<br>【火候】沸水入锅15秒即捞出"}], "泉山区": [{"name": "百味地锅鸡", "tags": ["徐州特产"], "brief": "历史明朝抗倭英雄曹顶发明", "desc": "", "story": "", "shop": "", "compare": "【历史】明朝抗倭英雄曹顶发明<br>【工艺】用竹杠坐在上面反复跳压面团<br>【口感】跳压出的面条有微细小孔"}, {"name": "马市街饣它汤", "tags": ["徐州特产"], "brief": "选羊只用本地青山羊", "desc": "", "story": "", "shop": "", "compare": "【选羊】只用本地青山羊<br>【熬汤】羊骨羊头熬制24小时<br>【切肉】手切羊肉"}], "鼓楼区": [{"name": "三中高皇羊肉馆", "tags": ["徐州特产"], "brief": "蜂蜜用蜂蜜代替白糖", "desc": "", "story": "", "shop": "", "compare": "【蜂蜜】用蜂蜜代替白糖<br>【面饼】饼子薄如蝉翼"}], "铜山区": [{"name": "棉布地锅鸡", "tags": ["徐州特产"], "brief": "蔬菜十余种新鲜蔬菜", "desc": "", "story": "", "shop": "", "compare": "【蔬菜】十余种新鲜蔬菜<br>【饼皮】贾汪石磨面粉"}], "贾汪区": [{"name": "贾汪菜煎饼", "tags": ["徐州特产"], "brief": "选肉只用本地土猪后腿肉", "desc": "", "story": "", "shop": "", "compare": "【选肉】只用本地土猪后腿肉<br>【腌制】盐、糖、料酒腌制<br>【风干】自然风干49天"}], "睢宁县": [{"name": "王集香肠", "tags": ["徐州特产"], "brief": "发酵黄豆煮熟后自然发酵", "desc": "", "story": "", "shop": "", "compare": "【发酵】黄豆煮熟后自然发酵<br>【配料】辣椒粉、盐、芝麻"}], "邳州市": [{"name": "邳州盐豆子", "tags": ["徐州特产"], "brief": "历史与刘邦、樊哙有关", "desc": "", "story": "", "shop": "", "compare": "【历史】与刘邦、樊哙有关<br>【鼋汁】用鼋鱼汁烹制<br>【口感】酥烂脱骨"}], "沛县": [{"name": "沛县狗肉", "tags": ["徐州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "徐州板面", "tags": ["徐州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "changzhou": {"name": "常州", "icon": "🎋", "desc": "常州味道，食美常州", "districts": {"天宁区": [{"name": "常州银丝面", "tags": ["常州特产"], "brief": "素汁酱油、麻油、白糖秘方", "desc": "", "story": "", "shop": "", "compare": "【素汁】酱油、麻油、白糖秘方<br>【百年】1923年开业至今"}, {"name": "义隆素菜馆麻油素面", "tags": ["常州特产"], "brief": "甜咸甜馅用白糖桂花", "desc": "", "story": "", "shop": "", "compare": "【甜咸】甜馅用白糖桂花<br>【工艺】多道工序<br>【口感】外酥里软"}], "钟楼区": [{"name": "常州糕团店大麻糕", "tags": ["常州特产"], "brief": "汤汁鸡汤皮冻调制", "desc": "", "story": "", "shop": "", "compare": "【汤汁】鸡汤皮冻调制<br>【收口】至少14个褶子"}, {"name": "迎桂馒头店小笼包", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "新北区": [{"name": "常德糟扣肉", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "武进区": [{"name": "焦溪二花脸肉圆", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "金坛区": [{"name": "金坛标米封缸酒", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "溧阳市": [{"name": "天目湖砂锅鱼头", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "溧阳扎肝", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "雁来蕈豆腐煲", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "银丝面", "tags": ["常州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "suzhou": {"name": "苏州", "icon": "🌸", "desc": "苏州味道，人间天堂", "districts": {"姑苏区": [{"name": "松鼠桂鱼", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "响油鳝糊", "tags": ["苏州特产"], "brief": "原料糯米粳米按季节调配", "desc": "", "story": "", "shop": "", "compare": "【原料】糯米粳米按季节调配<br>【染色】天然植物汁液染色"}, {"name": "苏式糕团", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "吴中区": [{"name": "东山白切羊肉", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "相城区": [{"name": "阳澄湖大闸蟹", "tags": ["苏州特产"], "brief": "汤底青鱼头、老鸭、猪骨熬制", "desc": "", "story": "", "shop": "", "compare": "【汤底】青鱼头、老鸭、猪骨熬制<br>【红油】秘制红油是灵魂<br>【浇头】爆鱼用青鱼"}], "昆山市": [{"name": "奥灶面", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "常熟市": [{"name": "常熟蒸菜", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "张家港市": [{"name": "凤凰豆腐", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "苏式面", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "美食对比": [{"name": "熏鱼 vs 爆鱼", "tags": ["苏州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "nantong": {"name": "南通", "icon": "🌊", "desc": "江海交汇，鲜南通", "districts": {"崇川区": [{"name": "南通脆鳝", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "白汁鮰鱼", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "通州区": [{"name": "石港窨糕", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "西亭脆饼", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "海门区": [{"name": "海门提汤羊肉", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "红烧海门山羊肉", "tags": ["南通特产"], "brief": "鲜活当天捕捞当天卖", "desc": "", "story": "", "shop": "", "compare": "【鲜活】当天捕捞当天卖<br>【品种】梭子蟹、文蛤、对虾<br>【做法】清蒸最能体现本味"}], "启东市": [{"name": "吕四海鲜", "tags": ["南通特产"], "brief": "历史明末董小宛所创", "desc": "", "story": "", "shop": "", "compare": "【历史】明末董小宛所创<br>【原料】芝麻、面粉、麦芽糖<br>【口感】酥松香甜"}], "如皋市": [{"name": "如皋董糖", "tags": ["南通特产"], "brief": "产地如皋与金华、宣威并称三大名火腿", "desc": "", "story": "", "shop": "", "compare": "【产地】如皋与金华、宣威并称三大名火腿<br>【历史】始于宋代"}, {"name": "如皋火腿", "tags": ["南通特产"], "brief": "产地如东濒临南黄海", "desc": "", "story": "", "shop": "", "compare": "【产地】如东濒临南黄海<br>【品质】乾隆御赐天下第一鲜"}], "如东县": [{"name": "如东文蛤", "tags": ["南通特产"], "brief": "安全海安养殖河豚已无毒", "desc": "", "story": "", "shop": "", "compare": "【安全】海安养殖河豚已无毒<br>【口感】肉质细嫩如豆腐"}], "海安市": [{"name": "河豚鱼", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "跳面（曹公面）", "tags": ["南通特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "lianyungang": {"name": "连云港", "icon": "🏔️", "desc": "山海相连，鲜美连云港", "districts": {"海州区": [{"name": "小鱼煎饼", "tags": ["连云港特产"], "brief": "历史相传商朝宰相伊尹所创", "desc": "", "story": "", "shop": "", "compare": "【历史】相传商朝宰相伊尹所创<br>【腌制】三十余味中草药腌制<br>【工艺】果木熏烤90天"}, {"name": "花果山风鹅", "tags": ["连云港特产"], "brief": "薄度薄如蝉翼", "desc": "", "story": "", "shop": "", "compare": "【薄度】薄如蝉翼<br>【历史】秦始皇东巡时曾品尝"}], "赣榆区": [{"name": "赣榆煎饼", "tags": ["连云港特产"], "brief": "产地赣榆海头镇", "desc": "", "story": "", "shop": "", "compare": "【产地】赣榆海头镇<br>【吃法】清蒸最能体现鲜美"}, {"name": "清蒸梭子蟹", "tags": ["连云港特产"], "brief": "历史相传孙膑所创", "desc": "", "story": "", "shop": "", "compare": "【历史】相传孙膑所创<br>【药材】二十余味香料煮制"}], "东海县": [{"name": "桃林烧鸡", "tags": ["连云港特产"], "brief": "选鸡农家散养两年以上", "desc": "", "story": "", "shop": "", "compare": "【选鸡】农家散养两年以上<br>【做法】旺火红烧"}, {"name": "东海老公鸡", "tags": ["连云港特产"], "brief": "虫豆天蛾幼虫", "desc": "", "story": "", "shop": "", "compare": "【虫】豆天蛾幼虫<br>【吃法】与丝瓜同煮鲜美无比"}], "灌云县": [{"name": "灌云豆丹", "tags": ["连云港特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "灌云大糕", "tags": ["连云港特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "灌南县": [{"name": "硕项湖大闸蟹", "tags": ["连云港特产"], "brief": "汤底鱼骨熬制8小时", "desc": "", "story": "", "shop": "", "compare": "【汤底】鱼骨熬制8小时<br>【浇头】当日海鲜现做"}], "代表面食": [{"name": "海鲜面", "tags": ["连云港特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "huaian": {"name": "淮安", "icon": "🌾", "desc": "淮扬菜根，美食之乡", "districts": {"淮安区": [{"name": "软兜长鱼", "tags": ["淮安特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "平桥豆腐", "tags": ["淮安特产"], "brief": "历史康熙年间创制", "desc": "", "story": "", "shop": "", "compare": "【历史】康熙年间创制<br>【吃法】甲鱼裙边胶质丰富"}, {"name": "朱桥甲鱼羹", "tags": ["淮安特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "文楼汤包", "tags": ["淮安特产"], "brief": "历史戚继光驻军钦工时所创", "desc": "", "story": "", "shop": "", "compare": "【历史】戚继光驻军钦工时所创<br>【工艺】铁棒捶打至起胶<br>【口感】外酥里嫩，弹牙多汁"}], "清江浦区": [{"name": "钦工肉圆", "tags": ["淮安特产"], "brief": "历史1915年获巴拿马万国博览会银奖", "desc": "", "story": "", "shop": "", "compare": "【历史】1915年获巴拿马万国博览会银奖<br>【工艺】反复揉搓拉成细丝"}, {"name": "淮安茶馓", "tags": ["淮安特产"], "brief": "历史朱元璋少时曾受此招待", "desc": "", "story": "", "shop": "", "compare": "【历史】朱元璋少时曾受此招待<br>【吃法】一锅两吃"}], "洪泽区": [{"name": "朱坝活鱼锅贴", "tags": ["淮安特产"], "brief": "产地中国第四大淡水湖", "desc": "", "story": "", "shop": "", "compare": "【产地】中国第四大淡水湖<br>【特征】青壳白肚、金爪黄毛"}, {"name": "洪泽湖大闸蟹", "tags": ["淮安特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "盱眙县": [{"name": "盱眙十三香龙虾", "tags": ["淮安特产"], "brief": "选鹅农家散养两年以上老鹅", "desc": "", "story": "", "shop": "", "compare": "【选鹅】农家散养两年以上老鹅<br>【本地】盱眙人待客必备"}, {"name": "红烧黄花塘老鹅", "tags": ["淮安特产"], "brief": "历史相传尧舜时期尧母所创", "desc": "", "story": "", "shop": "", "compare": "【历史】相传尧舜时期尧母所创<br>【特点】乳白浓醇"}], "金湖县": [{"name": "尧母月子汤", "tags": ["淮安特产"], "brief": "产地白马湖水质清澈", "desc": "", "story": "", "shop": "", "compare": "【产地】白马湖水质清澈<br>【评价】隐世好蟹"}, {"name": "白马湖大闸蟹", "tags": ["淮安特产"], "brief": "乾隆乾隆南巡时赐名素鸡", "desc": "", "story": "", "shop": "", "compare": "【乾隆】乾隆南巡时赐名素鸡<br>【选料】鸡胸肉配虾仁蒸制"}], "涟水县": [{"name": "涟水鸡糕", "tags": ["淮安特产"], "brief": "做法猪小肚包裹肉馅腌制风干", "desc": "", "story": "", "shop": "", "compare": "【做法】猪小肚包裹肉馅腌制风干"}, {"name": "高沟捆蹄", "tags": ["淮安特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "长鱼面", "tags": ["淮安特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "yancheng": {"name": "盐城", "icon": "🦅", "desc": "鹤舞鹿鸣，盐滋味", "districts": {"亭湖区": [{"name": "东台鱼汤面", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "盐城八大碗", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "盐都区": [{"name": "大纵湖螃蟹", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "大丰区": [{"name": "麋鹿风干肉", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "东台市": [{"name": "东台发绣", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "东台爆炸瓜", "tags": ["非遗"], "brief": "非遗省级非物质文化遗产", "desc": "", "story": "", "shop": "", "compare": "【非遗】省级非物质文化遗产<br>【选料】藕粉做皮"}], "建湖县": [{"name": "建湖藕粉圆", "tags": ["盐城特产"], "brief": "历史始于明代", "desc": "", "story": "", "shop": "", "compare": "【历史】始于明代<br>【寓意】过年必备"}], "阜宁县": [{"name": "阜宁大糕", "tags": ["盐城特产"], "brief": "产地土地肥沃", "desc": "", "story": "", "shop": "", "compare": "【产地】土地肥沃<br>【品质】米粒饱满"}], "射阳县": [{"name": "射阳大米", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "东台鱼汤面", "tags": ["盐城特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "yangzhou": {"name": "扬州", "icon": "🌙", "desc": "烟花三月，味在扬州", "districts": {"广陵区": [{"name": "扬州烫干丝", "tags": ["扬州特产"], "brief": "别名老鹅", "desc": "", "story": "", "shop": "", "compare": "【别名】老鹅<br>【做法】本地鹅腌制后风干"}, {"name": "扬州盐水鹅", "tags": ["扬州特产"], "brief": "四味鲜肉、青菜、豆沙、芝麻", "desc": "", "story": "", "shop": "", "compare": "【四味】鲜肉、青菜、豆沙、芝麻<br>【寓意】团圆美满"}, {"name": "四喜汤团", "tags": ["扬州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "邗江区": [{"name": "扬州炒饭", "tags": ["扬州特产"], "brief": "历史源自唐朝房玄龄府宴秘方", "desc": "", "story": "", "shop": "", "compare": "【历史】源自唐朝房玄龄府宴秘方<br>【选料】高山散养水牛"}, {"name": "裔家牛肉", "tags": ["扬州特产"], "brief": "产地江都区樊川镇", "desc": "", "story": "", "shop": "", "compare": "【产地】江都区樊川镇<br>【吃法】切片即食"}], "江都区": [{"name": "樊川小肚", "tags": ["扬州特产"], "brief": "产地捺山是古代火山遗址", "desc": "", "story": "", "shop": "", "compare": "【产地】捺山是古代火山遗址<br>【特点】形如凤羽"}], "仪征市": [{"name": "仪征绿杨春茶", "tags": ["地理标志"], "brief": "汪曾祺其名篇《端午的咸鸭蛋》", "desc": "", "story": "", "shop": "", "compare": "【汪曾祺】其名篇《端午的咸鸭蛋》<br>【品质】2014年国家地理标志"}], "高邮市": [{"name": "高邮咸鸭蛋", "tags": ["扬州特产"], "brief": "作者汪曾祺最爱的家乡菜", "desc": "", "story": "", "shop": "", "compare": "【作者】汪曾祺最爱的家乡菜"}, {"name": "汪豆腐", "tags": ["扬州特产"], "brief": "产地宝应县荷藕之乡", "desc": "", "story": "", "shop": "", "compare": "【产地】宝应县荷藕之乡<br>【口感】清香爽滑"}], "宝应县": [{"name": "宝应藕粉", "tags": ["扬州特产"], "brief": "产地宝应湖水质清澈", "desc": "", "story": "", "shop": "", "compare": "【产地】宝应湖水质清澈<br>【吃法】炖汤后汤汁浓白"}, {"name": "宝应黄颡鱼", "tags": ["扬州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "阳春面", "tags": ["扬州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "zhenjiang": {"name": "镇江", "icon": "🏯", "desc": "醋香天下，江南食府", "districts": {"京口区": [{"name": "水晶肴肉", "tags": ["镇江特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "锅盖面", "tags": ["镇江特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "润州区": [{"name": "镇江香醋", "tags": ["镇江特产"], "brief": "历史镇江南乡千年古镇", "desc": "", "story": "", "shop": "", "compare": "【历史】镇江南乡千年古镇<br>【面条】手擀制成<br>【隐藏吃法】加一勺镇江香醋"}, {"name": "宝堰干拌面", "tags": ["镇江特产"], "brief": "吃法先喝汤再拌面", "desc": "", "story": "", "shop": "", "compare": "【吃法】先喝汤再拌面<br>【民谚】吃了长鱼汤，三天不思肉"}], "丹徒区": [{"name": "丹徒长鱼汤", "tags": ["非遗"], "brief": "历史丹阳延陵镇传统名菜", "desc": "", "story": "", "shop": "", "compare": "【历史】丹阳延陵镇传统名菜<br>【非遗】2014年省级非遗"}], "丹阳市": [{"name": "延陵鸭饺", "tags": ["镇江特产"], "brief": "产地江南黄酒之乡", "desc": "", "story": "", "shop": "", "compare": "【产地】江南黄酒之乡<br>【历史】酿造超两千年"}, {"name": "丹阳黄酒", "tags": ["镇江特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "扬中市": [{"name": "红烧河豚", "tags": ["镇江特产"], "brief": "产地茅山道教名山", "desc": "", "story": "", "shop": "", "compare": "【产地】茅山道教名山<br>【选鹅】林下散养一年以上"}], "句容市": [{"name": "茅山老鹅", "tags": ["镇江特产"], "brief": "历史乾隆赐名五香茶干", "desc": "", "story": "", "shop": "", "compare": "【历史】乾隆赐名五香茶干<br>【工艺】用茶叶熏制"}, {"name": "茅山茶干", "tags": ["镇江特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "锅盖面", "tags": ["镇江特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "taizhou": {"name": "泰州", "icon": "⛵", "desc": "水城慢生活，早茶最扬州", "districts": {"海陵区": [{"name": "泰州烫干丝", "tags": ["泰州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}, {"name": "泰州鱼汤面", "tags": ["泰州特产"], "brief": "历史始于宋代", "desc": "", "story": "", "shop": "", "compare": "【历史】始于宋代<br>【做法】面粉猪油制成"}, {"name": "泰州麻饼", "tags": ["泰州特产"], "brief": "做法面团反复擀压", "desc": "", "story": "", "shop": "", "compare": "【做法】面团反复擀压"}], "姜堰区": [{"name": "姜堰酥饼", "tags": ["泰州特产"], "brief": "做法腌制、油炸、熏制", "desc": "", "story": "", "shop": "", "compare": "【做法】腌制、油炸、熏制"}], "兴化市": [{"name": "兴化熏鱼", "tags": ["泰州特产"], "brief": "历史明清时期贡品", "desc": "", "story": "", "shop": "", "compare": "【历史】明清时期贡品<br>【舌尖】舌尖上的中国介绍"}, {"name": "兴化龙香芋", "tags": ["泰州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "靖江市": [{"name": "靖江蟹黄汤包", "tags": ["泰州特产"], "brief": "产地泰兴银杏之乡", "desc": "", "story": "", "shop": "", "compare": "【产地】泰兴银杏之乡<br>【历史】千年种植历史"}], "泰兴市": [{"name": "泰兴白果", "tags": ["泰州特产"], "brief": "历史源于泰兴黄桥镇", "desc": "", "story": "", "shop": "", "compare": "【历史】源于泰兴黄桥镇<br>【新四军】黄桥烧饼歌使此闻名"}, {"name": "黄桥烧饼", "tags": ["泰州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}], "代表面食": [{"name": "泰州鱼汤面", "tags": ["泰州特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}, "suqian": {"name": "宿迁", "icon": "🏞️", "desc": "项王故里，水韵酒香", "districts": {"宿城区": [{"name": "黄狗猪头肉", "tags": ["宿迁特产"], "brief": "历史源于清代", "desc": "", "story": "", "shop": "", "compare": "【历史】源于清代<br>【做法】五花肉和山药分层蒸制"}, {"name": "宿迁膘鸡", "tags": ["宿迁特产"], "brief": "产地骆马湖水质清澈", "desc": "", "story": "", "shop": "", "compare": "【产地】骆马湖水质清澈<br>【特点】通体透明"}], "宿豫区": [{"name": "骆马湖银鱼羹", "tags": ["非遗"], "brief": "历史明末史可法所创", "desc": "", "story": "", "shop": "", "compare": "【历史】明末史可法所创<br>【非遗】2023年入选省级非遗"}], "泗阳县": [{"name": "泗阳膘鸡", "tags": ["宿迁特产"], "brief": "产地新袁镇水草丰茂", "desc": "", "story": "", "shop": "", "compare": "【产地】新袁镇水草丰茂<br>【做法】可做全羊宴"}, {"name": "新袁羊肉", "tags": ["宿迁特产"], "brief": "产地洪泽湖40%水面在泗洪", "desc": "", "story": "", "shop": "", "compare": "【产地】洪泽湖40%水面在泗洪"}], "泗洪县": [{"name": "泗洪大闸蟹", "tags": ["宿迁特产"], "brief": "传统传统工艺制作", "desc": "", "story": "", "shop": "", "compare": "【传统】传统工艺制作<br>【品种】条酥、桃酥等"}], "沭阳县": [{"name": "沭阳老式糕点", "tags": ["宿迁特产"], "brief": "讲究宿迁人不吃面，一天没劲头", "desc": "", "story": "", "shop": "", "compare": "【讲究】宿迁人不吃面，一天没劲头"}], "代表面食": [{"name": "宿迁手擀面", "tags": ["宿迁特产"], "brief": "", "desc": "", "story": "", "shop": "", "compare": ""}]}}};
-
-let checkedFoods = JSON.parse(localStorage.getItem('jiangsuFoodChecked') || '[]');
-function updateCheckinCount() { document.getElementById('checkin-count').textContent = checkedFoods.length; }
-function toggleCheckin(foodKey, btn) { event.stopPropagation(); var idx = checkedFoods.indexOf(foodKey); if (idx > -1) { checkedFoods.splice(idx, 1); btn.classList.remove('checked'); btn.textContent = '打卡'; } else { checkedFoods.push(foodKey); btn.classList.add('checked'); btn.textContent = '已打卡'; } localStorage.setItem('jiangsuFoodChecked', JSON.stringify(checkedFoods)); updateCheckinCount(); }
-
-function renderFoodData() {
-    var container = document.getElementById('food-content');
-    container.innerHTML = '';
-    
-    Object.entries(foodData).forEach(function(entry) {
-        var cityKey = entry[0];
-        var cityData = entry[1];
-        var citySection = document.createElement('section');
-        citySection.className = 'city-section city-' + cityKey;
-        citySection.setAttribute('data-city', cityKey);
-        
-        var header = document.createElement('div');
-        header.className = 'city-header';
-        header.innerHTML = '<span class="city-icon">' + cityData.icon + '</span><div><h2>' + cityData.name + '</h2><div class="city-desc">' + cityData.desc + '</div></div>';
-        citySection.appendChild(header);
-        
-        Object.entries(cityData.districts).forEach(function(de) {
-            var districtName = de[0];
-            var foods = de[1];
-            if (!foods || foods.length === 0) return;
-            
-            var districtDiv = document.createElement('div');
-            districtDiv.className = 'district-section';
-            
-            var districtTitle = document.createElement('div');
-            districtTitle.className = 'district-title';
-            districtTitle.innerHTML = '<span class="district-icon"><svg viewBox="0 0 24 24"><path d="M3,9 L12,3 L21,9 M3,9 L12,15 L21,9 M12,15 L12,21"/></svg></span><span>' + districtName + '</span>';
-            districtDiv.appendChild(districtTitle);
-            
-            var foodGrid = document.createElement('div');
-            foodGrid.className = 'food-grid';
-            
-            foods.forEach(function(food) {
-                var foodKey = cityKey + '-' + districtName + '-' + food.name;
-                var card = document.createElement('div');
-                card.className = 'food-card';
-                card.dataset.foodKey = foodKey;
-                card.onclick = function() { openModal(food, cityData.name, districtName); };
+    <main class="container">
+        <!-- 使用说明 -->
+        <section id="usage" class="section">
+            <h2 class="section-title">使用说明</h2>
+            <div class="usage-intro">
+                <p><strong>适用人群：</strong>休闲骑行者、亲子家庭、入门骑友</p>
+                <p>本路书收录江浙沪地区适合休闲骑行的精选路线，以<strong>20-60km</strong>中短途路线为主，难度控制在<strong>1-3星</strong>，适合周末或小长假出行。每条路线均标注距离、用时、难度、看点及抵达方式，方便快速查阅和规划行程。</p>
                 
-                var tags = food.tags.slice(0, 2).map(function(tag) {
-                    var tagClass = 'food-tag';
-                    if (tag.includes('非遗') || tag.includes('地理标志') || tag.includes('老字号')) tagClass += ' heritage';
-                    else if (tag.includes('时令') || tag.includes('季节')) tagClass += ' seasonal';
-                    else if (tag.includes('小吃') || tag.includes('街头')) tagClass += ' snack';
-                    return '<span class="' + tagClass + '">' + tag + '</span>';
-                }).join('');
+                <div class="difficulty-legend">
+                    <div class="difficulty-item">
+                        <span class="difficulty-stars">★☆☆</span>
+                        <span>轻松休闲</span>
+                    </div>
+                    <div class="difficulty-item">
+                        <span class="difficulty-stars">★★☆</span>
+                        <span>轻度挑战</span>
+                    </div>
+                    <div class="difficulty-item">
+                        <span class="difficulty-stars">★★★</span>
+                        <span>进阶路线</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 速查表 -->
+        <section id="quick-table" class="section">
+            <h2 class="section-title">速查表</h2>
+            
+            <div class="region-filter">
+                <button class="filter-btn active" data-region="all">全部</button>
+                <button class="filter-btn" data-region="苏州">苏州</button>
+                <button class="filter-btn" data-region="无锡">无锡</button>
+                <button class="filter-btn" data-region="常州">常州</button>
+                <button class="filter-btn" data-region="上海">上海</button>
+                <button class="filter-btn" data-region="杭州">杭州</button>
+                <button class="filter-btn" data-region="南京">南京</button>
+                <button class="filter-btn" data-region="湖州">湖州</button>
+            </div>
+
+            <table class="quick-table">
+                <thead>
+                    <tr>
+                        <th>路线名称</th>
+                        <th>区域</th>
+                        <th>距离</th>
+                        <th>用时</th>
+                        <th>难度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-region="苏州">
+                        <td class="route-name">吴江环太湖骑行</td>
+                        <td class="route-region">苏州·吴江</td>
+                        <td>50km</td>
+                        <td>3-4h</td>
+                        <td><span class="difficulty-badge difficulty-2">★★☆</span></td>
+                    </tr>
+                    <tr data-region="苏州">
+                        <td class="route-name">太湖1号公路</td>
+                        <td class="route-region">苏州·高新区</td>
+                        <td>30km</td>
+                        <td>2-3h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="苏州">
+                        <td class="route-name">阳澄湖半岛骑行</td>
+                        <td class="route-region">苏州·相城</td>
+                        <td>20km</td>
+                        <td>1.5-2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="无锡">
+                        <td class="route-name">蠡湖环线</td>
+                        <td class="route-region">无锡·滨湖</td>
+                        <td>22km</td>
+                        <td>2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="无锡">
+                        <td class="route-name">马山环岛路线</td>
+                        <td class="route-region">无锡·马山</td>
+                        <td>18km</td>
+                        <td>1.5-2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="无锡">
+                        <td class="route-name">龙池山自行车公园</td>
+                        <td class="route-region">无锡·宜兴</td>
+                        <td>12km</td>
+                        <td>1.5h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="无锡">
+                        <td class="route-name">霞客大道骑行线</td>
+                        <td class="route-region">无锡·江阴</td>
+                        <td>22.5km</td>
+                        <td>2h</td>
+                        <td><span class="difficulty-badge difficulty-2">★★☆</span></td>
+                    </tr>
+                    <tr data-region="常州">
+                        <td class="route-name">滆湖环线</td>
+                        <td class="route-region">常州·武进</td>
+                        <td>25km</td>
+                        <td>2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="常州">
+                        <td class="route-name">天目湖沙河水库环线</td>
+                        <td class="route-region">常州·溧阳</td>
+                        <td>20km</td>
+                        <td>2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="上海">
+                        <td class="route-name">浦东滨江骑行</td>
+                        <td class="route-region">上海·浦东</td>
+                        <td>24km</td>
+                        <td>2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="上海">
+                        <td class="route-name">环淀山湖</td>
+                        <td class="route-region">上海·青浦</td>
+                        <td>35km</td>
+                        <td>3h</td>
+                        <td><span class="difficulty-badge difficulty-2">★★☆</span></td>
+                    </tr>
+                    <tr data-region="上海">
+                        <td class="route-name">滴水湖环湖</td>
+                        <td class="route-region">上海·临港</td>
+                        <td>8.5km</td>
+                        <td>1h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="杭州">
+                        <td class="route-name">西湖环湖骑行</td>
+                        <td class="route-region">杭州·西湖</td>
+                        <td>12km</td>
+                        <td>1.5-2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="杭州">
+                        <td class="route-name">千岛湖环湖</td>
+                        <td class="route-region">杭州·淳安</td>
+                        <td>40-60km</td>
+                        <td>4-6h</td>
+                        <td><span class="difficulty-badge difficulty-2">★★☆</span></td>
+                    </tr>
+                    <tr data-region="湖州">
+                        <td class="route-name">太湖9号公路</td>
+                        <td class="route-region">湖州·长兴</td>
+                        <td>99km</td>
+                        <td>6-8h</td>
+                        <td><span class="difficulty-badge difficulty-3">★★★</span></td>
+                    </tr>
+                    <tr data-region="南京">
+                        <td class="route-name">玄武湖环线</td>
+                        <td class="route-region">南京·玄武</td>
+                        <td>16km</td>
+                        <td>1.5-2h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                    <tr data-region="南京">
+                        <td class="route-name">紫金山环线</td>
+                        <td class="route-region">南京·钟山</td>
+                        <td>22km</td>
+                        <td>2.5h</td>
+                        <td><span class="difficulty-badge difficulty-2">★★☆</span></td>
+                    </tr>
+                    <tr data-region="江阴">
+                        <td class="route-name">江阴外滩骑行</td>
+                        <td class="route-region">无锡·江阴</td>
+                        <td>8km</td>
+                        <td>1h</td>
+                        <td><span class="difficulty-badge difficulty-1">★☆☆</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 四时骑行 -->
+        <section id="seasons" class="section">
+            <h2 class="section-title">四时骑行</h2>
+            <div class="season-grid">
+                <div class="season-card">
+                    <div class="season-icon">🌸</div>
+                    <div class="season-name">春季骑行</div>
+                    <div class="season-desc">
+                        <p>3-5月最佳</p>
+                        <p>太湖边油菜花、樱花盛开</p>
+                        <p>推荐：鼋头渚环湖、千岛湖环湖</p>
+                    </div>
+                </div>
+                <div class="season-card">
+                    <div class="season-icon">☀️</div>
+                    <div class="season-name">夏季骑行</div>
+                    <div class="season-desc">
+                        <p>6-8月需注意防暑</p>
+                        <p>清晨或傍晚骑行最佳</p>
+                        <p>推荐：西湖夜骑、浦东滨江</p>
+                    </div>
+                </div>
+                <div class="season-card">
+                    <div class="season-icon">🍂</div>
+                    <div class="season-name">秋季骑行</div>
+                    <div class="season-desc">
+                        <p>9-11月黄金季节</p>
+                        <p>桂花飘香、层林尽染</p>
+                        <p>推荐：阳澄湖半岛、紫金山</p>
+                    </div>
+                </div>
+                <div class="season-card">
+                    <div class="season-icon">❄️</div>
+                    <div class="season-name">冬季骑行</div>
+                    <div class="season-desc">
+                        <p>12-2月注意保暖</p>
+                        <p>人少景美、别有风味</p>
+                        <p>推荐：太湖湿地、环蠡湖</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 苏州路线 -->
+        <section id="suzhou" class="section">
+            <h2 class="section-title">苏州路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 吴江环太湖 -->
+                <div class="route-card" data-region="苏州">
+                    <div class="route-header">
+                        <span class="route-title">吴江环太湖骑行</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">50km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">3-4h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            从万公堤出发，沿东太湖生态园一路向南骑行，途经苏州湾体育公园、太湖绿洲、廿时驿、南公堤，最终抵达七都太湖湿地公园。沿线配套设施完善，驿站补给充足。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">东太湖日出</span>
+                                <span class="highlight-tag">苏州湾夜景</span>
+                                <span class="highlight-tag">七都双塔</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：4号线苏州湾北站</span>
+                        <a href="https://uri.amap.com/search?query=苏州湾体育公园" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 太湖1号公路 -->
+                <div class="route-card" data-region="苏州">
+                    <div class="route-header">
+                        <span class="route-title">太湖1号公路</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">30km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2-3h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            从南京大学苏州校区出发，沿太湖岸线骑行，串联贡山码头、马山游客中心、苏州裸心泊度假村等站点。路线平坦，设有专用骑行道，途经多个太湖骑行驿站。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">太湖湖景</span>
+                                <span class="highlight-tag">马山风光</span>
+                                <span class="highlight-tag">生态驿站</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：太湖游客中心停车场</span>
+                        <a href="https://uri.amap.com/search?query=南京大学苏州校区" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 阳澄湖半岛 -->
+                <div class="route-card" data-region="苏州">
+                    <div class="route-header">
+                        <span class="route-title">阳澄湖半岛骑行</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">20km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1.5-2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            环阳澄湖半岛骑行，经过仙樱湖公园、比斯特购物村。秋季可体验大闸蟹捕捞。路面平坦，湖景开阔，适合亲子家庭出行。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">湖光水色</span>
+                                <span class="highlight-tag">秋季蟹肥</span>
+                                <span class="highlight-tag">欧式小镇</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：阳城环路站</span>
+                        <a href="https://uri.amap.com/search?query=阳澄湖半岛" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 无锡路线 -->
+        <section id="wuxi" class="section">
+            <h2 class="section-title">无锡路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 蠡湖环线 -->
+                <div class="route-card" data-region="无锡">
+                    <div class="route-header">
+                        <span class="route-title">蠡湖环线</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">22km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            无锡风景最优美的骑行线路之一。沿蠡湖骑行，途经蠡湖之光、金城湾湿地公园、鼋头渚。春季樱花盛放时，骑行体验绝佳。路线平坦，无陡坡。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">蠡湖风光</span>
+                                <span class="highlight-tag">樱花季</span>
+                                <span class="highlight-tag">鼋头渚</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：蠡湖之光站</span>
+                        <a href="https://uri.amap.com/search?query=蠡湖之光" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 马山环岛 -->
+                <div class="route-card" data-region="无锡">
+                    <div class="route-header">
+                        <span class="route-title">马山环岛路线</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">18km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1.5-2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            从雷渚亭出发，沿太湖十里明珠堤环岛骑行，途经闾江口湿地、阖闾城博物馆、网红S弯等景点。山水湖光相连，自然风光秀美，名胜古迹众多。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">太湖大桥</span>
+                                <span class="highlight-tag">闾闔古城</span>
+                                <span class="highlight-tag">网红S弯</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：灵山大佛停车场</span>
+                        <a href="https://uri.amap.com/search?query=灵山大佛" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 龙池山 -->
+                <div class="route-card" data-region="无锡">
+                    <div class="route-header">
+                        <span class="route-title">龙池山自行车公园</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">12km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1.5h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春季最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            被誉为"江浙沪骑行天花板"的慢骑天堂。以自行车慢骑为特色，建成彩色沥青骑行道，串联龙池山慢游十八景。每骑行一段即可停下来欣赏茶园、竹林、水库美景。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">茶园风光</span>
+                                <span class="highlight-tag">竹海秘境</span>
+                                <span class="highlight-tag">水库倒影</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：龙池山风景区</span>
+                        <a href="https://uri.amap.com/search?query=龙池山自行车公园" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 霞客大道 -->
+                <div class="route-card" data-region="无锡">
+                    <div class="route-header">
+                        <span class="route-title">霞客大道骑行线</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">22.5km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            北起江阴梅园路，南至锡澄公路江阴与无锡交界处，串联马镇、青阳、峭岐、南闸等镇。途经江南千年古刹悟空寺，被誉为"江苏第一景观大道"。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">悟空寺</span>
+                                <span class="highlight-tag">江南古镇</span>
+                                <span class="highlight-tag">景观大道</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：青阳镇政府站</span>
+                        <a href="https://uri.amap.com/search?query=霞客大道" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 上海路线 -->
+        <section id="shanghai" class="section">
+            <h2 class="section-title">上海路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 浦东滨江 -->
+                <div class="route-card" data-region="上海">
+                    <div class="route-header">
+                        <span class="route-title">浦东滨江骑行</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">24km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            从杨浦大桥至闵行区界，途经陆家嘴、南浦大桥、世博公园、卢浦大桥、后滩公园、前滩公园。共享单车随借随还，每1公里设有"望江驿"服务站，被誉为上海"休闲骑行天花板"。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">陆家嘴夜景</span>
+                                <span class="highlight-tag">滨江灯光</span>
+                                <span class="highlight-tag">跨江大桥</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚇 地铁：陆家嘴站/东体站</span>
+                        <a href="https://uri.amap.com/search?query=浦东滨江" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 环淀山湖 -->
+                <div class="route-card" data-region="上海">
+                    <div class="route-header">
+                        <span class="route-title">环淀山湖</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">35km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">3h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            上海最大淡水湖环湖骑行，途经东方绿舟、朱家角古镇、彩虹桥等景点。路况平坦宽阔，沿途可品尝扎肉、粽子等古镇美食。春季湖岸线风景绝美。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">彩虹桥</span>
+                                <span class="highlight-tag">朱家角</span>
+                                <span class="highlight-tag">东方绿舟</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：东方绿舟站</span>
+                        <a href="https://uri.amap.com/search?query=东方绿舟" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 滴水湖 -->
+                <div class="route-card" data-region="上海">
+                    <div class="route-header">
+                        <span class="route-title">滴水湖环湖</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">8.5km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            位于临港新城的环湖骑行，专用封闭骑行道，无红绿灯无陡坡。可延伸至塘下公路水杉林、东海大桥、南汇嘴观海公园。视野开阔，可看海，适合亲子家庭。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">滴水湖</span>
+                                <span class="highlight-tag">东海大桥</span>
+                                <span class="highlight-tag">水杉林</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚇 地铁：滴水湖站</span>
+                        <a href="https://uri.amap.com/search?query=滴水湖" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 元荡湖 -->
+                <div class="route-card" data-region="上海">
+                    <div class="route-header">
+                        <span class="route-title">元荡湖骑行线</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">23km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            长三角一体化示范区核心水域，23公里滨水线全线贯通。沿途有多处驿站、便民服务点，15处亲水平台可供短暂停歇。网红慢行桥是打卡点。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">湖光水色</span>
+                                <span class="highlight-tag">元荡慢行桥</span>
+                                <span class="highlight-tag">鼋荡小馆</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：元荡湖停车场</span>
+                        <a href="https://uri.amap.com/search?query=元荡湖" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 杭州路线 -->
+        <section id="hangzhou" class="section">
+            <h2 class="section-title">杭州路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 西湖环湖 -->
+                <div class="route-card" data-region="杭州">
+                    <div class="route-header">
+                        <span class="route-title">西湖环湖骑行</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">12km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1.5-2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            经典环湖路线：断桥→北山街→杨公堤→南山路→湖滨。杨公堤段有"西湖过山车"之称，连续翻越六座拱桥下坡冲爽。沿途可欣赏西湖十景，傍晚南山路夜景浪漫。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">断桥残雪</span>
+                                <span class="highlight-tag">杨公堤六桥</span>
+                                <span class="highlight-tag">雷峰夕照</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚇 地铁：龙翔桥站/凤起路站</span>
+                        <a href="https://uri.amap.com/search?query=断桥残雪" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 千岛湖 -->
+                <div class="route-card" data-region="杭州">
+                    <div class="route-header">
+                        <span class="route-title">千岛湖环湖骑行</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">40-60km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">4-6h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            被誉为"中国最美骑行路线"之一。千汾线、淳杨线沿湖而建，可根据体力选择4-60km不同路段。沿途有鹅卵石路段、起伏路段等趣味体验，还可乘船登岛。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">千岛湖风光</span>
+                                <span class="highlight-tag">亚运场馆</span>
+                                <span class="highlight-tag">湖心岛</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：千岛湖客运中心</span>
+                        <a href="https://uri.amap.com/search?query=千岛湖" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 径山骑行 -->
+                <div class="route-card" data-region="杭州">
+                    <div class="route-header">
+                        <span class="route-title">径山漕雅线</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">19km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            入选"环浙骑游"精品骑行路。从径山镇漕桥到鸬鸟镇雅城，途经径山花海、茶园、苕溪营地。沿线设有净行驿公路驿站、T92街区等配套完善的骑行服务点。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">径山花海</span>
+                                <span class="highlight-tag">茶园风光</span>
+                                <span class="highlight-tag">苕溪骑行</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：径山景区停车场</span>
+                        <a href="https://uri.amap.com/search?query=径山镇" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 南京路线 -->
+        <section id="nanjing" class="section">
+            <h2 class="section-title">南京路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 玄武湖环线 -->
+                <div class="route-card" data-region="南京">
+                    <div class="route-header">
+                        <span class="route-title">玄武湖环线</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">16km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1.5-2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            沿明城墙和玄武湖骑行，从神策门出发途经玄武门、鸡鸣寺，最终到达玄武湖。山水城林融为一体，环湖骑行可欣赏"金陵明珠"秀美风光。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">明城墙</span>
+                                <span class="highlight-tag">鸡鸣寺</span>
+                                <span class="highlight-tag">玄武湖</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚇 地铁：玄武门站/南京站</span>
+                        <a href="https://uri.amap.com/search?query=玄武湖" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 紫金山环线 -->
+                <div class="route-card" data-region="南京">
+                    <div class="route-header">
+                        <span class="route-title">紫金山环线</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">22km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2.5h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            从白马公园出发，途经中山植物园、明孝陵、中山陵、梧桐大道。秋季金色梧桐秋叶令人沉醉，沿途前湖、琵琶湖如散落的明珠，骑行兼顾人文与自然。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">梧桐大道</span>
+                                <span class="highlight-tag">中山陵</span>
+                                <span class="highlight-tag">明孝陵</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：白马公园站</span>
+                        <a href="https://uri.amap.com/search?query=白马公园" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 江心洲环线 -->
+                <div class="route-card" data-region="南京">
+                    <div class="route-header">
+                        <span class="route-title">江心洲环岛线</span>
+                        <span class="difficulty-badge difficulty-2" style="background:rgba(255,255,255,0.2);color:#fff;">★★☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">24km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            独立骑行道，全程无汽车，直面长江主航道。可远观南京眼步行桥、双子塔，欣赏江景和落日，文艺感十足。适合7岁以上儿童家庭挑战。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">南京眼</span>
+                                <span class="highlight-tag">长江风光</span>
+                                <span class="highlight-tag">江岛日落</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚇 地铁+公交：10号线江心洲站</span>
+                        <a href="https://uri.amap.com/search?query=南京眼" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 湖州路线 -->
+        <section id="huzhou" class="section">
+            <h2 class="section-title">湖州路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 太湖9号公路 -->
+                <div class="route-card" data-region="湖州">
+                    <div class="route-header">
+                        <span class="route-title">太湖9号公路</span>
+                        <span class="difficulty-badge difficulty-3" style="background:rgba(255,255,255,0.2);color:#fff;">★★★</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">99km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">6-8h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★★</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            以34公里太湖湖岸线为基础，因线路形似数字"9"，全长99公里得名。联动111处旅游景点，串联太湖博物馆、太湖图影湿地等打卡点。可分段骑行，滨湖段适合休闲。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">太湖湖景</span>
+                                <span class="highlight-tag">滨湖绿道</span>
+                                <span class="highlight-tag">湿地风光</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：长兴太湖博物馆</span>
+                        <a href="https://uri.amap.com/search?query=长兴太湖博物馆" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 环太湖三日线 -->
+                <div class="route-card" data-region="湖州">
+                    <div class="route-header">
+                        <span class="route-title">环太湖骑行（分段）</span>
+                        <span class="difficulty-badge difficulty-3" style="background:rgba(255,255,255,0.2);color:#fff;">★★★</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">300+km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">2-3天</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★★★</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">春秋最佳</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            全国骑行爱好者公认的经典路线。从云梦谷出发，途经苏州、无锡、常州、湖州，全程沿太湖岸边。一边是万顷碧波，一边是郁郁葱葱的山林。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">全程太湖</span>
+                                <span class="highlight-tag">水乡古镇</span>
+                                <span class="highlight-tag">环湖风景</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚗 自驾：云梦谷休闲园</span>
+                        <a href="https://uri.amap.com/search?query=云梦谷休闲园" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 江阴本地路线 -->
+        <section id="jiangyin" class="section">
+            <h2 class="section-title">江阴本地路线</h2>
+            
+            <div class="routes-grid">
+                <!-- 江阴外滩 -->
+                <div class="route-card" data-region="江阴">
+                    <div class="route-header">
+                        <span class="route-title">江阴外滩骑行</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">8km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            沿8公里滨江公园骑行，赏长江日落与灯光秀。途经鹅鼻嘴公园，可观"江尾海头"碑、长江三水交汇奇景。夜骑体验滨江夜景尤为浪漫。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">长江夜景</span>
+                                <span class="highlight-tag">灯光秀</span>
+                                <span class="highlight-tag">鹅鼻嘴</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：外滩站</span>
+                        <a href="https://uri.amap.com/search?query=江阴外滩" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 飞马水城 -->
+                <div class="route-card" data-region="江阴">
+                    <div class="route-header">
+                        <span class="route-title">飞马水城骑行</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">5km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">0.5h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            马文化主题乐园，欧式宫殿建筑群。乘贡多拉游船穿越"威尼斯"，体验马术表演与马车巡游。夜景尤为壮观，骑行打卡出片率高。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">欧式建筑</span>
+                                <span class="highlight-tag">贡多拉</span>
+                                <span class="highlight-tag">马术表演</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：飞马水城站</span>
+                        <a href="https://uri.amap.com/search?query=飞马水城" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+
+                <!-- 长泾老街 -->
+                <div class="route-card" data-region="江阴">
+                    <div class="route-header">
+                        <span class="route-title">长泾老街骑行</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-info">
+                            <div class="info-item">
+                                <span class="info-label">距离</span>
+                                <span class="info-value">10km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">用时</span>
+                                <span class="info-value">1h</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">难度</span>
+                                <span class="info-value">★☆☆</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">季节</span>
+                                <span class="info-value">全年</span>
+                            </div>
+                        </div>
+                        <div class="route-desc">
+                            千米石板街寻明清民居，访上官云珠故居，尝非遗长泾月饼。古镇韵味浓厚，骑行节奏舒缓，适合周末亲子慢游。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">看点</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">石板老街</span>
+                                <span class="highlight-tag">上官云珠</span>
+                                <span class="highlight-tag">长泾月饼</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-footer">
+                        <span class="access-info">🚌 公交：长泾车站</span>
+                        <a href="https://uri.amap.com/search?query=长泾老街" target="_blank" class="nav-link">🗺️ 导航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 亲子骑行 -->
+        <section id="family" class="section family-section">
+            <h2 class="section-title">亲子骑行路线</h2>
+            <p style="margin-bottom: 25px;">以下路线专为亲子家庭精选，路况平缓、配套完善、风景优美，适合带娃出行。</p>
+            
+            <div class="routes-grid">
+                <!-- 阳澄湖亲子 -->
+                <div class="route-card">
+                    <div class="route-header" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 100%);">
+                        <span class="route-title">阳澄湖半岛亲子骑</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-desc">
+                            仙樱湖公园超大草坪可野餐，湖边步道适合带娃骑车（有家庭自行车租赁）。比斯特购物村欧式小镇风格，有儿童游乐区，家长可边逛边休息。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">适合年龄</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">3-12岁</span>
+                                <span class="highlight-tag">家庭友好</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 滴水湖亲子 -->
+                <div class="route-card">
+                    <div class="route-header" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 100%);">
+                        <span class="route-title">滴水湖环湖亲子</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-desc">
+                            单圈仅8.5公里，专用封闭骑行道无红绿灯无陡坡，视野开阔可看海。可延伸至东海大桥、南汇嘴观海公园，沿途可玩沙踩水。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">适合年龄</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">5-12岁</span>
+                                <span class="highlight-tag">看海胜地</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 顾村公园 -->
+                <div class="route-card">
+                    <div class="route-header" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 100%);">
+                        <span class="route-title">顾村公园绿道</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-desc">
+                            6.5公里环形绿道，在公园里骑行超安全，满眼都是绿植。骑累了还能去草坪上野餐，带娃放电超合适。樱花季尤为美丽。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">适合年龄</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">3-10岁</span>
+                                <span class="highlight-tag">安全首选</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 元荡湖亲子 -->
+                <div class="route-card">
+                    <div class="route-header" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 100%);">
+                        <span class="route-title">元荡湖亲子休闲线</span>
+                        <span class="difficulty-badge difficulty-1" style="background:rgba(255,255,255,0.2);color:#fff;">★☆☆</span>
+                    </div>
+                    <div class="route-body">
+                        <div class="route-desc">
+                            5公里亲子休闲路线，全路况良好道路平坦。元荡慢行桥作为网红打卡点，桥上视野开阔可欣赏湖光水色，适合亲子骑行初体验。
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight-title">适合年龄</div>
+                            <div class="highlight-tags">
+                                <span class="highlight-tag">4-12岁</span>
+                                <span class="highlight-tag">入门首选</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 夜骑指南 -->
+        <section id="nightride" class="section nightride-section">
+            <h2 class="section-title">夜骑指南</h2>
+            <p style="opacity: 0.9; margin-bottom: 20px;">夏夜骑行是避暑好选择，这些路线夜间体验更佳。注意安全，做好防护！</p>
+            
+            <div class="routes-grid">
+                <!-- 西湖夜骑 -->
+                <div class="route-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                    <div class="route-header" style="background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);">
+                        <span class="route-title">西湖夜骑</span>
+                        <span style="font-size: 0.85rem; opacity: 0.9;">约11km</span>
+                    </div>
+                    <div class="route-body" style="color: #fff;">
+                        <div class="route-desc" style="background: rgba(255,255,255,0.1); border-left-color: #e94560;">
+                            断桥→北山街→杨公堤→南山路→湖滨。杨公堤段"西湖过山车"夜骑尤为刺激，晚风拂面凉爽惬意。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 浦东滨江夜骑 -->
+                <div class="route-card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                    <div class="route-header" style="background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);">
+                        <span class="route-title">浦东滨江夜骑</span>
+                        <span style="font-size: 0.85rem; opacity: 0.9;">约15km</span>
+                    </div>
+                    <div class="route-body" style="color: #fff;">
+                        <div class="route-desc" style="background: rgba(255,255,255,0.1); border-left-color: #e94560;">
+                            两岸灯光璀璨，陆家嘴摩天大楼夜景震撼。"望江驿"每1公里设有一座，方便休息补给。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nightride-rules">
+                <h4>⚡ 夜骑安全须知</h4>
+                <ul>
+                    <li><strong>必备装备：</strong>头盔、前灯（30米照射距离）、后灯（红色闪烁）、反光背心</li>
+                    <li><strong>骑行礼仪：</strong>不戴耳机、单车骑行、主动避让行人</li>
+                    <li><strong>路线选择：</strong>优先选择路灯明亮的专用骑行道，避免黑暗路段</li>
+                    <li><strong>速度控制：</strong>夜间视野受限，建议时速不超过20km/h</li>
+                    <li><strong>结伴同行：</strong>建议2人以上组队骑行，开启位置共享</li>
+                    <li><strong>天气注意：</strong>暴雨、大风天气避免夜骑，就近寻找避雨点</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 装备清单 -->
+        <section id="gear" class="section">
+            <h2 class="section-title">装备清单</h2>
+            
+            <div class="gear-grid">
+                <div class="gear-category must-have">
+                    <h4>🛡️ 必带装备</h4>
+                    <ul class="gear-list">
+                        <li>自行车（自备或租赁）</li>
+                        <li>头盔（安全第一）</li>
+                        <li>骑行手套</li>
+                        <li>水壶/水瓶（1-2瓶）</li>
+                        <li>手机+充电宝</li>
+                        <li>基础维修工具（打气筒、补胎工具）</li>
+                    </ul>
+                </div>
+
+                <div class="gear-category">
+                    <h4>💡 建议携带</h4>
+                    <ul class="gear-list">
+                        <li>骑行眼镜（防风防虫）</li>
+                        <li>防晒霜/冰袖</li>
+                        <li>骑行裤/坐垫套</li>
+                        <li>简易雨衣</li>
+                        <li>能量零食（能量棒、坚果）</li>
+                        <li>纸巾/湿巾</li>
+                    </ul>
+                </div>
+
+                <div class="gear-category seasonal">
+                    <h4>🗓️ 季节性装备</h4>
+                    <ul class="gear-list">
+                        <li><strong>春夏：</strong>驱蚊液、遮阳帽、凉感巾</li>
+                        <li><strong>秋冬：</strong>保暖外套、魔术头巾、手电筒</li>
+                        <li><strong>雨季：</strong>防水包、雨披、手机防水套</li>
+                        <li><strong>夜骑：</strong>前灯、后灯、反光背心</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 安全须知 -->
+        <section id="safety" class="section safety-section">
+            <h2 class="section-title">安全须知</h2>
+            
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <h4>🚦 交通规则</h4>
+                    <p>靠右行驶，禁止逆行；经过路口务必减速慢行；不闯红灯、不占用机动车道；与机动车保持安全距离。</p>
+                </div>
                 
-                card.innerHTML = '<div class="food-card-header"><div class="food-name">' + food.name + '</div><div class="food-tags">' + tags + '</div></div><div class="food-card-body"><div class="food-brief">' + (food.brief || '') + '</div><div class="food-footer"><button class="checkin-btn" onclick="toggleCheckin(\'' + foodKey.replace(/'/g, "\\'") + '\', this)">打卡</button><span class="food-detail-btn">详情</span></div></div>';
+                <div class="safety-card">
+                    <h4>🛡️ 防护意识</h4>
+                    <p>始终佩戴头盔；不边骑行边看手机；双手不离车把；转弯前伸手示意；不脱把骑行或做危险动作。</p>
+                </div>
                 
-                foodGrid.appendChild(card);
+                <div class="safety-card">
+                    <h4>⚡ 车辆检查</h4>
+                    <p>出发前检查刹车、轮胎、链条；确保车灯正常工作；调整坐垫高度至合适位置；确认携带打气筒。</p>
+                </div>
+                
+                <div class="safety-card">
+                    <h4>💧 补给原则</h4>
+                    <p>每15-20分钟补充水分；每45-60分钟休息一次；长途骑行携带能量补给；感到不适立即休息。</p>
+                </div>
+                
+                <div class="safety-card">
+                    <h4>🌤️ 天气应对</h4>
+                    <p>出发前查看天气预报；高温天气错峰骑行（早出晚归）；雨天路面湿滑降低速度；雷电天气停止骑行。</p>
+                </div>
+                
+                <div class="safety-card">
+                    <h4>📱 紧急联络</h4>
+                    <p>保存紧急救援电话；告知家人行程；开启手机定位共享；遇到危险及时求助或报警。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>江浙骑行路书 · 长三角休闲骑行路线精选</p>
+        <p>祝你骑行愉快，一路平安！</p>
+        <p class="copyright">© 2024-2026 江浙骑行路书 · 仅供参考 · 骑行请注意安全</p>
+    </footer>
+
+    <script>
+        // 区域筛选功能
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const region = this.dataset.region;
+                
+                // 更新按钮状态
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 筛选表格行
+                const rows = document.querySelectorAll('.quick-table tbody tr');
+                rows.forEach(row => {
+                    if (region === 'all' || row.dataset.region === region) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
             });
-            
-            districtDiv.appendChild(foodGrid);
-            citySection.appendChild(districtDiv);
         });
-        
-        container.appendChild(citySection);
-    });
-    
-    updateCheckinCount();
-    setupScrollAnimation();
-    updateCheckinButtons();
-}
 
-function setupScrollAnimation() {
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
-    }, { threshold: 0.1 });
-    
-    document.querySelectorAll('.city-section, .food-card').forEach(function(el) { observer.observe(el); });
-}
-
-function updateCheckinButtons() {
-    document.querySelectorAll('.food-card').forEach(function(card) {
-        var foodKey = card.dataset.foodKey;
-        var btn = card.querySelector('.checkin-btn');
-        if (checkedFoods.includes(foodKey)) { btn.classList.add('checked'); btn.textContent = '已打卡'; }
-    });
-}
-
-function openModal(food, cityName, districtName) {
-    document.getElementById('modal-title').textContent = food.name;
-    document.getElementById('modal-location').textContent = cityName + ' · ' + districtName;
-    document.getElementById('modal-desc').innerHTML = formatContent(food.desc || '');
-    
-    var storySection = document.getElementById('story-section');
-    var storyContent = document.getElementById('modal-story');
-    if (food.story) { storySection.classList.remove('hidden'); storyContent.innerHTML = formatContent(food.story); }
-    else { storySection.classList.add('hidden'); }
-    
-    var compareSection = document.getElementById('compare-section');
-    var compareContent = document.getElementById('modal-compare');
-    if (food.compare) { compareSection.style.display = 'block'; compareContent.innerHTML = formatContent(food.compare); }
-    else { compareSection.style.display = 'none'; }
-    
-    var shopSection = document.getElementById('shop-section');
-    var shopContent = document.getElementById('modal-shop');
-    if (food.shop) { shopSection.classList.remove('hidden'); shopContent.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>📍 推荐地点：</strong>' + food.shop + '</span>'; }
-    else { shopSection.classList.add('hidden'); }
-    
-    document.getElementById('modal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-function formatContent(text) {
-    if (!text) return '';
-    return text.split('<br>').filter(function(t) { return t.trim(); }).map(function(t) { return '<p>' + t.replace(/【([^】]+)】/g, '<strong>$1</strong>：') + '</p>'; }).join('');
-}
-
-function closeModal() { document.getElementById('modal').classList.remove('show'); document.body.style.overflow = ''; }
-document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
-
-document.querySelectorAll('.nav-list button').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        var city = this.getAttribute('data-city');
-        document.querySelectorAll('.nav-list button').forEach(function(b) { b.classList.remove('active'); });
-        this.classList.add('active');
-        
-        document.querySelectorAll('.city-section').forEach(function(section) {
-            var sectionCity = section.getAttribute('data-city');
-            if (city === 'all') section.classList.remove('hidden');
-            else section.classList.toggle('hidden', sectionCity !== city);
-        });
-        
-        if (city === 'all') window.scrollTo({ top: 0, behavior: 'smooth' });
-        else {
-            var targetSection = document.querySelector('.city-section[data-city="' + city + '"]');
-            if (targetSection) {
-                var navHeight = document.querySelector('.nav-bar').offsetHeight;
-                var targetTop = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
-                window.scrollTo({ top: targetTop, behavior: 'smooth' });
-            }
-        }
-    });
-});
-
-(function() {
-    try {
-        if (typeof foodData === 'undefined') throw new Error('foodData未定义');
-        renderFoodData();
-    } catch (e) {
-        console.error('网站初始化错误:', e);
-        document.getElementById('food-content').innerHTML = '<div style="padding:40px;text-align:center;color:#C41E3A;"><h2>数据加载出错</h2><p>请刷新页面重试。</p></div>';
-    }
-})();
-</script>
+    </script>
 </body>
 </html>
